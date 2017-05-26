@@ -10,6 +10,8 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_OUT,
   SIGN_OUT_SUCCESS,
+  SUBMIT_WIN,
+  UPDATE_WINS,
 } from './constants';
 
 export function toggleShowSignIn() {
@@ -43,3 +45,4 @@ export function signOutSuccess() {
     type: SIGN_OUT_SUCCESS,
   };
 }
+

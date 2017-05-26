@@ -5,15 +5,15 @@
 */
 
 import React from 'react';
-import { Button } from './styles';
+import { Button, Wrapper, H3 } from './styles';
 
 
 function SignedInUserNav({ username, signOut }) {
   return (
-    <div>
-      <h2>{username}</h2>
+    <Wrapper>
+      <H3>{username}</H3>
       <Button onClick={() => signOut()}>Sign Out</Button>
-    </div>
+    </Wrapper>
   );
 }
 

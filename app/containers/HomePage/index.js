@@ -1,22 +1,61 @@
 /*
+ *
  * HomePage
  *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { submitWin as submitWinHeader } from 'containers/Header/actions';
+import Helmet from 'react-helmet';
+import AddWinToggle from 'components/AddWinToggle';
+import AddWin from 'components/AddWin';
+import MainContent from 'components/MainContent';
+import { createStructuredSelector } from 'reselect';
+import { Wrapper } from './styles';
+import * as actions from './actions';
+import * as selectors from './selectors';
+export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  handleSubmit(payload) {
+    return new Promise((resolve, reject) => {
+      this
+        .props
+        .submitWin({ data: payload, resolve, reject });
+    });
+  }
+
   render() {
     return (
-      <h1>
-        homepage
-      </h1>
+      <Wrapper>
+        <Helmet
+          title="HomePage"
+          meta={[
+            { name: 'description', content: 'Description of HomePage' },
+          ]}
+        />
+        <AddWinToggle {...this.props} />
+        { this.props.showAddWin && <AddWin {...this.props} onSubmit={(payload) => this.handleSubmit(payload)} />}
+        <MainContent {...this.props} />
+      </Wrapper>
     );
   }
 }
+
+HomePage.propTypes = {
+  showAddWin: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  showAddWin: selectors.selectShowAddWin(),
+  wins: selectors.selectWins(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleAddWin: () => dispatch(actions.toggleAddWin()),
+    submitWin: (payload) => dispatch(actions.submitWin(payload)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
