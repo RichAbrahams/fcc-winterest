@@ -10,7 +10,6 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_OUT,
   SIGN_OUT_SUCCESS,
-  SUBMIT_WIN,
   UPDATE_WINS,
 } from './constants';
 
@@ -43,6 +42,14 @@ export function signOut() {
 export function signOutSuccess() {
   return {
     type: SIGN_OUT_SUCCESS,
+  };
+}
+
+
+export function updateWins(payload) {
+  return {
+    type: UPDATE_WINS,
+    payload,
   };
 }
 

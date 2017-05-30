@@ -6,18 +6,18 @@
 
 import React from 'react';
 import AddWinForm from 'components/AddWinForm';
-import { Wrapper } from './styles';
+import FullScreenCover from 'components/FullScreenCover';
 
 function AddWin(props) {
   return (
-    <Wrapper onClick={() => props.toggleAddWin()} >
+    <FullScreenCover>
       <AddWinForm {...props} onSubmit={props.onSubmit} />
-    </Wrapper>
+    </FullScreenCover>
   );
 }
 
 AddWin.propTypes = {
-
+  onSubmit: React.PropTypes.func,
 };
 
 export default AddWin;

@@ -11,4 +11,4 @@ export const SIGN_OUT = 'app/Header/SIGN_OUT';
 export const SIGN_OUT_SUCCESS = 'app/Header/SIGN_OUT_SUCCESS';
 export const FIREBASE_DATA_SUCCESS = 'app/Header/FIREBASE_DATA_SUCCESS';
 export const FIREBASE_DATA_ERROR = 'app/Header/FIREBASE_DATA_ERROR';
-
+export const UPDATE_WINS = 'app/Header/UPDATE_WINS';

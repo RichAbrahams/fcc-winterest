@@ -5,21 +5,20 @@
 */
 
 import React from 'react';
-import { Wrapper, Button } from './styles';
-
+import { FA } from './styles';
 
 function AddWinToggle({ toggleAddWin }) {
   return (
-    <Wrapper>
-      <Button onClick={() => toggleAddWin()}>
-        Add Win
-      </Button>
-    </Wrapper>
+    <FA
+      name="plus-circle"
+      size="4x"
+      onClick={() => toggleAddWin()}
+    />
   );
 }
 
 AddWinToggle.propTypes = {
-
+  toggleAddWin: React.PropTypes.func.isRequired,
 };
 
 export default AddWinToggle;

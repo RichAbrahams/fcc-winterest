@@ -1,12 +1,15 @@
+/* eslint no-console:0, no-constant-condition:0, arrow-body-style:0 */
+
 import { eventChannel, takeLatest } from 'redux-saga';
 import { fork, take, call, put, select } from 'redux-saga/effects';
 import { SubmissionError } from 'redux-form/immutable';
 import firebase from 'firebase';
-import { SUBMIT_WIN } from 'containers/HomePage/constants';
+import { LIKE_CLICK } from 'containers/HomePage/constants';
+import { SUBMIT_WIN, DELETE_WIN } from 'containers/MyWins/constants';
 import { selectUsername } from 'containers/Header/selectors';
-import { toggleAddWin, updateWins } from 'containers/HomePage/actions';
+import { toggleAddWin } from 'containers/MyWins/actions';
 import { SIGN_IN, SIGN_OUT, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS, FIREBASE_DATA_SUCCESS, FIREBASE_DATA_ERROR } from './constants';
-import { signInSuccess, signOutSuccess } from './actions';
+import { signInSuccess, signOutSuccess, toggleShowSignIn, updateWins } from './actions';
 
 const config = {
   apiKey: 'AIzaSyC-SpBJeIKE62gz5e_pRIx3iZ2vWOviVqc',
@@ -50,11 +53,13 @@ function* fireBaseReceiveData(channel) {
       case SIGN_IN_SUCCESS:
         yield put(signInSuccess({ username: action.payload.displayName }));
         break;
+      case SIGN_OUT_SUCCESS:
+        yield put(signOutSuccess());
+        break;
       case FIREBASE_DATA_SUCCESS:
         yield put(updateWins(action.payload.val()));
         break;
       case FIREBASE_DATA_ERROR:
-        console.log('FIREBASE_DATA_ERROR', action.payload);
         break;
       default:
         break;
@@ -110,12 +115,45 @@ function* submitWinSaga(action) {
   }
 }
 
+
+function* deleteWinSaga(action) {
+  yield dbRef.child(action.payload.uid).remove();
+}
+
+const addLike = (win) => {
+  dbRef.child(win.uid).set(win);
+};
+
+const removeLike = (win) => {
+  dbRef.child(win.uid).set(win);
+};
+
+function* likeClickSaga(action) {
+  const win = Object.assign({}, action.payload);
+  const user = yield select(selectUsername());
+  if (!user) {
+    yield put(toggleShowSignIn());
+  } else if (!win.liked) {
+    win.liked = [user];
+    yield addLike(win);
+  } else if (win.liked.indexOf(user) === -1) {
+    win.liked.push(user);
+    yield addLike(win);
+  } else {
+    const index = win.liked.indexOf(user);
+    win.liked.splice(index, 1);
+    yield removeLike(win);
+  }
+}
+
 export function* watcher() {
   const channel = yield call(initFirebase);
   yield fork(fireBaseReceiveData, channel);
   yield fork(takeLatest, SIGN_IN, signInSaga);
   yield fork(takeLatest, SIGN_OUT, signOutSaga);
   yield fork(takeLatest, SUBMIT_WIN, submitWinSaga);
+  yield fork(takeLatest, DELETE_WIN, deleteWinSaga);
+  yield fork(takeLatest, LIKE_CLICK, likeClickSaga);
 }
 
 export default [

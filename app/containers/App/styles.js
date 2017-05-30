@@ -12,7 +12,9 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3em 1em 0em 1em;
+  padding: 1em 1em 1em 1em;
   width: 100%;
+  flex-grow: 1;
+  background: #525143;
 `;
 

@@ -5,14 +5,13 @@
 */
 
 import React from 'react';
-// import styled from 'styled-components';
-
+import { H1 } from './styles';
 
 function Logo() {
   return (
-    <h1>
+    <H1>
       Winterest
-    </h1>
+    </H1>
   );
 }
 

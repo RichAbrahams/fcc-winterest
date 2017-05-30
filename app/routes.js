@@ -17,7 +17,7 @@ export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
- injectSagas(headerSagas);
+  injectSagas(headerSagas);
 
   return [
     {
@@ -25,14 +25,48 @@ export default function createRoutes(store) {
       name: 'homePage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/HomePage/reducer'),
           import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
+        importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: 'userwins/:slug',
+      name: 'userWins',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/UserWins/reducer'),
+          import('containers/UserWins'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
         importModules.then(([reducer, component]) => {
-          injectReducer('homePage', reducer.default);
+          injectReducer('userWins', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/mywins',
+      name: 'myWins',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/MyWins/reducer'),
+          import('containers/MyWins'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, component]) => {
+          injectReducer('myWins', reducer.default);
           renderRoute(component);
         });
 

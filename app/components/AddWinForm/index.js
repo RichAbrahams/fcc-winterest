@@ -3,26 +3,22 @@
 * AddWinForm
 *
 */
+/* eslint import/no-mutable-exports:0  jsx-a11y/img-has-alt:0*/
 
 import React from 'react';
 import { connect } from 'react-redux';
+import ErrorSpan from 'components/ErrorSpan';
+import FormFieldWrapper from 'components/FormFieldWrapper';
+import FormWrapper from 'components/FormWrapper';
+import FormTitle from 'components/FormTitle';
+import FormTextInput from 'components/FormTextInput';
+import FormButton from 'components/FormButton';
+import FormLabel from 'components/FormLabel';
+
 import { Field, reduxForm, formValueSelector } from 'redux-form/immutable';
-import { Wrapper, TextInput, Button, Label } from './styles';
+
 
 const stopProp = (e) => e.stopPropagation();
-
-const asyncValidate = (values) => {
-  const imageCheck = new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(false);
-    img.onerror = () => resolve(true);
-    img.src = values.get('imageLink');
-  });
-  return imageCheck.then((err) => {
-    if (err) { throw { imageLink: 'image link is broken' };
-    }
-  });
-};
 
 const validate = (values) => {
   const errors = {};
@@ -30,36 +26,50 @@ const validate = (values) => {
     errors.imgLink = 'Required';
   }
   if (!values.get('title')) {
-    errors.imgLink = 'Required';
+    errors.title = 'Required';
   }
   return errors;
 };
-const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
-  <div>
-    <Label>{label}</Label>
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <FormFieldWrapper>
+    <FormLabel>{label}</FormLabel>
     <div>
-      <TextInput {...input} placeholder={label} type={type} />
-      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+      <FormTextInput {...input} placeholder={label} type={type} />
+      {touched && ((error && <ErrorSpan>{error}</ErrorSpan>))}
     </div>
-  </div>
+  </FormFieldWrapper>
 );
+
 let AddWinForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting, hasImageValue } = props;
+  const { handleSubmit, submitting, hasImageValue } = props;
   return (
-    <Wrapper onClick={(e) => stopProp(e)}>
-      <h2>Add a new win</h2>
-      <hr />
+    <FormWrapper onClick={(e) => stopProp(e)}>
+      <FormTitle>Add a new win</FormTitle>
       <form onSubmit={handleSubmit}>
         {hasImageValue && <img src={hasImageValue} />}
         <Field name="title" type="text" component={renderField} label="Title" imageLinkError />
         <Field name="imgLink" type="text" component={renderField} label="Image Link" />
         <div>
-          <Button type="submit" disabled={submitting}>Submit</Button>
+          <FormButton type="submit" disabled={submitting}>Submit</FormButton>
         </div>
       </form>
-    </Wrapper>
+    </FormWrapper>
   );
 };
+
+renderField.propTypes = {
+  input: React.PropTypes.object,
+  label: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string.isRequired,
+  meta: React.PropTypes.object,
+};
+
+AddWinForm.propTypes = {
+  handleSubmit: React.PropTypes.func.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
+  hasImageValue: React.PropTypes.string,
+};
+
 
 AddWinForm = reduxForm({
   form: 'AddWin',

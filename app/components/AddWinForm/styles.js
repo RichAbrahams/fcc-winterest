@@ -5,7 +5,8 @@ export const Wrapper = styled.div `
   display: flex;
   flex-direction: column;
   padding: 2em;
-  background: white;
+  background: #463a3a;
+  color: white
   z-index: 10;
 `;
 
@@ -13,7 +14,7 @@ export const TextInput = styled.input`
   height: 2em;
   width: 100%;
   padding: 0.5em;
-  margin: 0em 0em 1em 0em;
+  margin: 0em 0em 0em 0em;
   color: #333;
   border: 2px solid #333;
   background: ${(props) => props.disabled ? '#95a2ad' : 'white'};
@@ -36,6 +37,10 @@ export const Button = styled.button`
 `;
 
 export const Label = styled.label`
-  margin: 0em 0em 0.5em 0em;
+  margin: 1em 0em 0.5em 0em;
 `;
 
+export const H2 = styled.h1`
+  font-family: 'Joti One', cursive;
+  color: white;
+`;

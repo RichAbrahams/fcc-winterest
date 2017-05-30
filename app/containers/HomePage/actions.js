@@ -5,27 +5,12 @@
  */
 
 import {
-  TOGGLE_ADD_WIN,
-  UPDATE_WINS,
-  SUBMIT_WIN,
+  LIKE_CLICK,
 } from './constants';
 
-export function toggleAddWin() {
+export function likeClick(payload) {
   return {
-    type: TOGGLE_ADD_WIN,
-  };
-}
-
-export function updateWins(payload) {
-  return {
-    type: UPDATE_WINS,
-    payload,
-  };
-}
-
-export function submitWin(payload) {
-  return {
-    type: SUBMIT_WIN,
+    type: LIKE_CLICK,
     payload,
   };
 }

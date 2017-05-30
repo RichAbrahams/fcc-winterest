@@ -6,55 +6,62 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { submitWin as submitWinHeader } from 'containers/Header/actions';
 import Helmet from 'react-helmet';
-import AddWinToggle from 'components/AddWinToggle';
-import AddWin from 'components/AddWin';
 import MainContent from 'components/MainContent';
+import WinContainer from 'components/WinContainer';
 import { createStructuredSelector } from 'reselect';
-import { Wrapper } from './styles';
+import { selectUsername, selectWins, selectLoaded } from 'containers/Header/selectors';
+import TitleWrapper from 'components/TitleWrapper';
+import PageWrapper from 'components/PageWrapper';
+import ContentWrapper from 'components/ContentWrapper';
+import PageTitle from 'components/PageTitle';
+import NavWrapper from 'components/NavWrapper';
+import MyWinsLink from 'components/MyWinsLink';
 import * as actions from './actions';
-import * as selectors from './selectors';
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
-  handleSubmit(payload) {
-    return new Promise((resolve, reject) => {
-      this
-        .props
-        .submitWin({ data: payload, resolve, reject });
-    });
-  }
 
   render() {
     return (
-      <Wrapper>
+      <PageWrapper>
         <Helmet
           title="HomePage"
           meta={[
             { name: 'description', content: 'Description of HomePage' },
           ]}
         />
-        <AddWinToggle {...this.props} />
-        { this.props.showAddWin && <AddWin {...this.props} onSubmit={(payload) => this.handleSubmit(payload)} />}
-        <MainContent {...this.props} />
-      </Wrapper>
+        { this.props.loaded && <TitleWrapper>
+          <PageTitle>
+            Latest Wins
+          </PageTitle>
+          <NavWrapper>
+            { this.props.user && <MyWinsLink />}
+          </NavWrapper>
+        </TitleWrapper>}
+        <ContentWrapper>
+          <MainContent>
+            { this.props.wins.map((item, index) => <WinContainer key={index} win={item} {...this.props} />)}
+          </MainContent>
+        </ContentWrapper>
+      </PageWrapper>
     );
   }
 }
 
 HomePage.propTypes = {
-  showAddWin: PropTypes.bool.isRequired,
+  loaded: PropTypes.bool,
+  user: PropTypes.string,
+  wins: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  showAddWin: selectors.selectShowAddWin(),
-  wins: selectors.selectWins(),
+  wins: selectWins(),
+  user: selectUsername(),
+  loaded: selectLoaded(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    toggleAddWin: () => dispatch(actions.toggleAddWin()),
-    submitWin: (payload) => dispatch(actions.submitWin(payload)),
+    likeClick: (payload) => dispatch(actions.likeClick(payload)),
   };
 }
 

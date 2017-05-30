@@ -17,14 +17,19 @@ injectGlobal`
   }
 
   #app {
-    background-color: #fafafa;
+    background: #525143;
     min-height: 100%;
     min-width: 100%;
+    display: flex;
   }
 
   p,
   label {
     font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
+  }
+
+  .my-gallery-class {
+    margin: 0 auto;
   }
 `;

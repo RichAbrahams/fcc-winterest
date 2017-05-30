@@ -9,10 +9,13 @@ import {
   TOGGLE_SHOW_SIGN_IN,
   SIGN_IN_SUCCESS,
   SIGN_OUT_SUCCESS,
+  UPDATE_WINS,
 } from './constants';
 
 const initialState = fromJS({
   showSignIn: false,
+  wins: {},
+  loaded: false,
 });
 
 function headerReducer(state = initialState, action) {
@@ -28,6 +31,9 @@ function headerReducer(state = initialState, action) {
       return state.set('showSignIn', false)
                   .delete('username');
     }
+    case UPDATE_WINS:
+      return state.set('wins', fromJS(action.payload))
+                  .set('loaded', true);
     default:
       return state;
   }
