@@ -6,5 +6,6 @@ export const FA = styled(FontAwesome) `
   text-shadow: 0px 8px rgba(21,16,16, 0.5);
   &:hover {
     color: #48e248;
+    cursor: pointer;
   }
 `;

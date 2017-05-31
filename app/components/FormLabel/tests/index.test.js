@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import FormLabel from '../index';
 
-// import FormLabel from '../index';
-
-describe('<FormLabel />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <FormLabel />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

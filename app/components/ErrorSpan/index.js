@@ -17,7 +17,7 @@ function ErrorSpan(props) {
 }
 
 ErrorSpan.propTypes = {
-  children: React.PropTypes.object,
+  children: React.PropTypes.string,
 };
 
 export default ErrorSpan;

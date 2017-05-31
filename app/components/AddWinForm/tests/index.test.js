@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import AddWinForm from '../index';
 
-// import AddWinForm from '../index';
-
-describe('<AddWinForm />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <AddWinForm />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

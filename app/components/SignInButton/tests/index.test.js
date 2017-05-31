@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import SignInButton from '../index';
 
-// import SignIn from '../index';
-
-describe('<SignIn />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <SignInButton />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

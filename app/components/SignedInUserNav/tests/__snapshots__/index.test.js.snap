@@ -1,0 +1,11 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="dqUvXD">
+  <h3
+    className="iaCmgk" />
+  <span
+    aria-hidden={true}
+    className="fa fa-sign-out fa-3x frqUSI"
+    onClick={[Function]} />
+</div>
+`;

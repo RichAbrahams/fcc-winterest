@@ -1,0 +1,6 @@
+exports[`test renders correctly 1`] = `
+<span
+  aria-hidden={true}
+  className="fa fa-arrow-circle-o-left fa-4x VmiKC"
+  onClick={[Function]} />
+`;

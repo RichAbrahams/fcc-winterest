@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import FullScreenCover from '../index';
 
-// import FullScreenCover from '../index';
-
-describe('<FullScreenCover />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <FullScreenCover>test</FullScreenCover>).toJSON();
+  expect(tree).toMatchSnapshot();
 });

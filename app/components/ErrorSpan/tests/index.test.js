@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import ErrorSpan from '../index';
 
-// import ErrorSpan from '../index';
-
-describe('<ErrorSpan />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <ErrorSpan />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import AddWin from '../index';
 
-// import AddWin from '../index';
-
-describe('<AddWin />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <AddWin />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

@@ -1,10 +1,20 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import { mount } from 'enzyme';
+import renderer from 'react-test-renderer';
+import Back from '../index';
 
-// import Back from '../index';
+const mockFunction = jest.fn();
 
-describe('<Back />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const component = renderer.create(
+    <Back toggleAddWin={mockFunction} />
+  );
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('should be able to click', () => {
+  const element = mount(<Back toggleAddWin={mockFunction} />);
+  element.find('span').simulate('click');
+  expect(mockFunction).toHaveBeenCalled();
 });

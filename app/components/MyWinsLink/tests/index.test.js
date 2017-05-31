@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import MyWinsLink from '../index';
 
-// import MyWinsLink from '../index';
-
-describe('<MyWinsLink />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <MyWinsLink />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

@@ -1,0 +1,37 @@
+exports[`test renders correctly 1`] = `
+<div
+  className="eMxMZS"
+  onClick={[Function]}>
+  <h2
+    className="cTfNJF">
+    Sign In
+  </h2>
+  <button
+    className="jgFpNU"
+    onClick={[Function]}>
+    <span
+      aria-hidden={true}
+      className="fa fa-google fa-2x jYQlWx"
+      color="white"
+      transform={undefined} />
+  </button>
+  <button
+    className="jgFpNU"
+    onClick={[Function]}>
+    <span
+      aria-hidden={true}
+      className="fa fa-github fa-2x jYQlWx"
+      color="white"
+      transform={undefined} />
+  </button>
+  <button
+    className="jgFpNU"
+    onClick={[Function]}>
+    <span
+      aria-hidden={true}
+      className="fa fa-twitter fa-2x jYQlWx"
+      color="white"
+      transform={undefined} />
+  </button>
+</div>
+`;

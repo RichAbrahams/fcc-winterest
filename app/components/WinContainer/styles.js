@@ -45,6 +45,7 @@ export const P = styled.p`
   color: #222;
   &:hover {
     color: #ffec4a;
+    cursor: pointer;
   }
 `;
 

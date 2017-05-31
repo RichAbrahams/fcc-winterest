@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import UserWinContainer from '../index';
 
-// import UserWinContainer from '../index';
-
-describe('<UserWinContainer />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <UserWinContainer />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

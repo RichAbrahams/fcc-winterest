@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import SignInDialog from '../index';
 
-// import SignInDialog from '../index';
-
-describe('<SignInDialog />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <SignInDialog />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

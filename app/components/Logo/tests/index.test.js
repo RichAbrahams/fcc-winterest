@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Logo from '../index';
 
-// import Logo from '../index';
-
-describe('<Logo />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <Logo />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

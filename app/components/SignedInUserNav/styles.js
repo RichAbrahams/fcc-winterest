@@ -12,7 +12,7 @@ export const Wrapper = styled.div `
   align-items: center;
 `;
 
-export const H3 = styled.h3 `
-
+export const H3 = styled.h2 `
+  color:white;
 `;
 

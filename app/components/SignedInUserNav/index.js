@@ -5,14 +5,18 @@
 */
 
 import React from 'react';
-import { Button, Wrapper, H3 } from './styles';
-
+import SignOutButton from 'components/SignOutButton';
+import { Wrapper, H3 } from './styles';
 
 function SignedInUserNav({ username, signOut }) {
   return (
     <Wrapper>
       <H3>{username}</H3>
-      <Button onClick={() => signOut()}>Sign Out</Button>
+      <SignOutButton
+        signOut={signOut}
+        name="sign-out"
+        size="3x"
+      />
     </Wrapper>
   );
 }

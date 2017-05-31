@@ -14,13 +14,14 @@ import FormTitle from 'components/FormTitle';
 import FormTextInput from 'components/FormTextInput';
 import FormButton from 'components/FormButton';
 import FormLabel from 'components/FormLabel';
+import FormCloseWrapper from 'components/FormCloseWrapper';
+import FormCloseIcon from 'components/FormCloseIcon';
+import Input from './styles';
 
 import { Field, reduxForm, formValueSelector } from 'redux-form/immutable';
 
-
-const stopProp = (e) => e.stopPropagation();
-
 const validate = (values) => {
+  console.log('values', values.toJS());
   const errors = {};
   if (!values.get('imgLink')) {
     errors.imgLink = 'Required';
@@ -34,16 +35,25 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <FormFieldWrapper>
     <FormLabel>{label}</FormLabel>
     <div>
-      <FormTextInput {...input} placeholder={label} type={type} />
+      <Input {...input} placeholder={label} type={type} />
       {touched && ((error && <ErrorSpan>{error}</ErrorSpan>))}
     </div>
   </FormFieldWrapper>
 );
 
 let AddWinForm = (props) => {
-  const { handleSubmit, submitting, hasImageValue } = props;
+  const { handleSubmit, submitting, hasImageValue, toggleAddWin } = props;
   return (
-    <FormWrapper onClick={(e) => stopProp(e)}>
+    <FormWrapper>
+      <FormCloseWrapper>
+        <FormCloseIcon
+          name="times-circle"
+          size="2x"
+          color="white"
+          transform="translate(20px,-20px);"
+          toggleAddWin={toggleAddWin}
+        />
+      </FormCloseWrapper>
       <FormTitle>Add a new win</FormTitle>
       <form onSubmit={handleSubmit}>
         {hasImageValue && <img src={hasImageValue} />}
@@ -68,6 +78,7 @@ AddWinForm.propTypes = {
   handleSubmit: React.PropTypes.func.isRequired,
   submitting: React.PropTypes.bool.isRequired,
   hasImageValue: React.PropTypes.string,
+  toggleAddWin: React.PropTypes.func.isRequired,
 };
 
 

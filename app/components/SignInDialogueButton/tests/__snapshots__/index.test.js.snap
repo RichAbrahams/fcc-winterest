@@ -1,0 +1,5 @@
+exports[`test renders correctly 1`] = `
+<button
+  className="jgFpNU"
+  onClick={[Function]} />
+`;

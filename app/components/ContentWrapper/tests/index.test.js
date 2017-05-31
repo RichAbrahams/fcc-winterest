@@ -1,10 +1,9 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import AddWinToggle from '../index';
 
-// import ContentWrapper from '../index';
-
-describe('<ContentWrapper />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <AddWinToggle />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

@@ -23,12 +23,6 @@ injectGlobal`
     display: flex;
   }
 
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
-  }
-
   .my-gallery-class {
     margin: 0 auto;
   }
